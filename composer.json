@@ -16,8 +16,8 @@
   },
   "autoload": {
     "psr-4": {
-      "B3none\\been-claimed\\": "src",
-      "B3none\\been-claimed\\Tests\\": "tests"
+      "B3none\\BeenClaimed\\": "src",
+      "B3none\\BeenClaimed\\Tests\\": "tests"
     }
   }
 }
