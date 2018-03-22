@@ -36,10 +36,6 @@ class BeenClaimedClient
      */
     public function hasBeenClaimed(string $id) : bool
     {
-        /**
-         * TODO: Scrape google maps.
-         * TODO: Scrape my business.
-         */
         try {
             return ($this->businessPageHelper->detect($id) || $this->mapsPageHelper->detect($id));
         } catch (\Exception $e) {

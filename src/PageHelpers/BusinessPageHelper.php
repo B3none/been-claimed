@@ -6,8 +6,16 @@ class BusinessPageHelper implements PageHelper
 {
     const BUSINESS_PAGE = "https://business.google.com/add/confirm/c/";
 
+    /**
+     * @var string
+     */
     protected $businessPageBody;
 
+    /**
+     * TODO: Add some search terms for the business page... lol
+     *
+     * @var array
+     */
     protected $searchTerms = [];
 
     /**
@@ -29,7 +37,7 @@ class BusinessPageHelper implements PageHelper
     /**
      * @return bool
      */
-    protected function wordSearch()
+    protected function wordSearch() : bool
     {
         if (!empty($this->searchTerms)) {
             foreach ($this->searchTerms as $searchTerm) {
