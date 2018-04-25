@@ -1,8 +1,8 @@
 <?php
 
-namespace B3none\BeenClaimed;
+namespace B3none\BeenClaimed\Controllers;
 
-use B3none\BeenClaimed\PageHelpers\PageHelper;
+use B3none\BeenClaimed\Helpers\PageHelper;
 
 class BeenClaimedController
 {
@@ -27,6 +27,6 @@ class BeenClaimedController
      */
     public function hasBeenClaimed() : bool
     {
-        return (new PageHelper())->detect($this->url);
+        return !(new PageHelper())->detect($this->url);
     }
 }

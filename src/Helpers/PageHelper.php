@@ -1,6 +1,6 @@
 <?php
 
-namespace B3none\BeenClaimed\PageHelpers;
+namespace B3none\BeenClaimed\Helpers;
 
 use B3none\BeenClaimed\Scraper\ScraperClient;
 

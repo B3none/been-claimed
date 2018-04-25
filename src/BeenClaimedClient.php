@@ -2,6 +2,8 @@
 
 namespace B3none\BeenClaimed;
 
+use B3none\BeenClaimed\Controllers\BeenClaimedController;
+
 class BeenClaimedClient
 {
     const MAPS_URL = "https://maps.google.com/?cid=";
