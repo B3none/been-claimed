@@ -2,6 +2,8 @@
 
 namespace B3none\BeenClaimed\PageHelpers;
 
+use B3none\BeenClaimed\Scraper\ScraperClient;
+
 class MapsPageHelper implements PageHelper
 {
     const MAPS_PAGE = "https://maps.google.com/?cid=";
@@ -12,6 +14,8 @@ class MapsPageHelper implements PageHelper
     protected $mapsPageBody;
 
     /**
+     * This is what we search the HTML output for.
+     *
      * @var array
      */
     protected $searchTerms = [
@@ -25,11 +29,8 @@ class MapsPageHelper implements PageHelper
      */
     public function detect(string $id) : bool
     {
-        $this->mapsPageBody = file_get_contents(self::MAPS_PAGE . $id) ?? false;
-
-        if (!$this->mapsPageBody) {
-            throw new \Exception("Error: Failed to get contents for [". self::MAPS_PAGE . $id . "]");
-        }
+        $scraper = new ScraperClient(self::MAPS_PAGE . $id);
+        $this->mapsPageBody = $scraper->getHTML();
 
         return $this->wordSearch();
     }

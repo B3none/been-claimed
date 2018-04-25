@@ -1,0 +1,11 @@
+{
+  "name": "been-claimed",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "dependencies": {
+    "chrome-launcher": "^0.10.2",
+    "chrome-remote-interface": "^0.25.5"
+  }
+}

@@ -2,6 +2,8 @@
 
 namespace B3none\BeenClaimed\PageHelpers;
 
+use B3none\BeenClaimed\Scraper\ScraperClient;
+
 class BusinessPageHelper implements PageHelper
 {
     const BUSINESS_PAGE = "https://business.google.com/add/confirm/c/";
@@ -12,7 +14,7 @@ class BusinessPageHelper implements PageHelper
     protected $businessPageBody;
 
     /**
-     * TODO: Add some search terms for the business page... lol
+     * TODO: Add some search terms for the business page...
      *
      * @var array
      */
@@ -25,11 +27,8 @@ class BusinessPageHelper implements PageHelper
      */
     public function detect(string $id) : bool
     {
-        $this->businessPageBody = file_get_contents(self::BUSINESS_PAGE . $id) ?? false;
-
-        if (!$this->businessPageBody) {
-            throw new \Exception("Error: Failed to get contents for [". self::BUSINESS_PAGE . $id . "]");
-        }
+        $scraper = new ScraperClient(self::BUSINESS_PAGE . $id);
+        $this->businessPageBody = $scraper->getHTML();
 
         return $this->wordSearch();
     }
