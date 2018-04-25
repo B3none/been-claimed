@@ -9,10 +9,8 @@ class BeenClaimedClientTest extends TestCase
 {
     public function test()
     {
-        $bcc = BeenClaimedClient::create();
-//        $hbcpass = $bcc->hasBeenClaimed('6247503322256067200');
-//        $this->assertFalse($hbcpass);
-        $hbcerr = $bcc->hasBeenClaimed('13853039586259035402');
-        $this->assertTrue($hbcerr);
+        $bcc = new BeenClaimedClient();
+        $siteOne = $bcc->loadById('6247503322256067200');
+        $siteOne->hasBeenClaimed();
     }
 }

@@ -1,2 +1,2 @@
-# been-claimed
-Detect whether a google maps listing has been claimed via their ID
+# BeenClaimed
+Detect whether a Google Maps listing has been claimed via their ID

@@ -2,45 +2,29 @@
 
 namespace B3none\BeenClaimed;
 
-use B3none\BeenClaimed\PageHelpers\BusinessPageHelper;
-use B3none\BeenClaimed\PageHelpers\MapsPageHelper;
-
 class BeenClaimedClient
 {
-    /**
-     * @var BusinessPageHelper
-     */
-    protected $businessPageHelper;
+    const MAPS_URL = "https://maps.google.com/?cid=";
 
     /**
-     * @var MapsPageHelper
-     */
-    protected $mapsPageHelper;
-
-    public static function create()
-    {
-        return new self(new BusinessPageHelper(), new MapsPageHelper());
-    }
-
-    public function __construct(BusinessPageHelper $businessPageHelper, MapsPageHelper $mapsPageHelper)
-    {
-        $this->businessPageHelper = $businessPageHelper;
-        $this->mapsPageHelper = $mapsPageHelper;
-    }
-
-    /**
-     * Return whether the page has been claimed.
+     * Load the BeenClaimedController with an ID.
      *
      * @param string $id
-     * @return bool
+     * @return BeenClaimedController
      */
-    public function hasBeenClaimed(string $id) : bool
+    public function loadById(string $id) : BeenClaimedController
     {
-        try {
-            return ($this->businessPageHelper->detect($id) || $this->mapsPageHelper->detect($id));
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-            return false;
-        }
+        return new BeenClaimedController(self::MAPS_URL . $id);
+    }
+
+    /**
+     * Load BeenClaimedController with a Google Maps URL.
+     *
+     * @param string $url
+     * @return BeenClaimedController
+     */
+    public function loadByMapsUrl(string $url) : BeenClaimedController
+    {
+        return new BeenClaimedController($url);
     }
 }
