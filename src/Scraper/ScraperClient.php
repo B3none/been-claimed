@@ -16,8 +16,6 @@ class ScraperClient
 
     public function getHTML()
     {
-        $output = shell_exec("node src/Scraper/Runner/runner.js '$this->url' 1000");
-
-        return $output;
+        return shell_exec("node src/Scraper/Runner/runner.js '$this->url' 1000");
     }
 }
