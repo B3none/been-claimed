@@ -6,10 +6,13 @@ use B3none\BeenClaimed\Scraper\ScraperClient;
 
 class PageHelper
 {
+    // One hour.
+    const STORE_TIME = (60 * 60);
+
     /**
-     * @var string
+     * @var array
      */
-    protected $body;
+    protected $bodies;
 
     /**
      * This is what we search the HTML output for.
@@ -22,27 +25,43 @@ class PageHelper
 
     /**
      * @param string $url
+     * @param array $customSearchTerms
+     * @param bool $includeDefaults
      * @return bool
      */
-    public function detect(string $url) : bool
+    public function detect(string $url, array $customSearchTerms = [], bool $includeDefaults = false) : bool
     {
+        if (sizeof($customSearchTerms)) {
+            if ($includeDefaults) {
+                $this->searchTerms = array_merge($this->searchTerms, $customSearchTerms);
+            } else {
+                $this->searchTerms = $customSearchTerms;
+            }
+        }
+
         if (sizeof($this->searchTerms)) {
-            $scraper = new ScraperClient($url);
-            $this->body = $scraper->getHTML();
+            if (!$this->bodies[$url] || $this->bodies[$url]['expire'] < time()) {
+                $scraper = new ScraperClient($url);
+                $this->bodies[$url] = [
+                    'body' => $scraper->getHTML(),
+                    'expire' => time() + self::STORE_TIME
+                ];
+            }
         } else {
             return false;
         }
 
-        return $this->wordSearch();
+        return $this->wordSearch($url);
     }
 
     /**
+     * @param string $url
      * @return bool
      */
-    protected function wordSearch() : bool
+    protected function wordSearch(string $url) : bool
     {
         foreach ($this->searchTerms as $searchTerm) {
-            if (!!strpos($this->body, $searchTerm)) {
+            if (!!strpos($this->bodies[$url], $searchTerm)) {
                 return true;
             };
         }

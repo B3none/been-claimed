@@ -8,9 +8,7 @@
       "email": "ablackham2000@gmail.com"
     }
   ],
-  "require": {
-    "guzzlehttp/guzzle": "^6.3"
-  },
+  "require": {},
   "autoload": {
     "psr-4": {
       "B3none\\BeenClaimed\\": "src"
