@@ -1,6 +1,9 @@
 # BeenClaimed
 Detect whether a Google Maps listing has been claimed.
 
+# Author
+[B3none](https://b3none.co.uk/) - Developer / Maintainer
+
 # Example usage
 ```php
 $beenClaimedClient = new BeenClaimedClient();
